@@ -1,7 +1,17 @@
+var SayHello = React.createClass({
+  render: function() {
+    return(
+      <div>
+        {this.props.text}
+      </div>
+    );
+  }
+});
+
 var HelloWorld = React.createClass({
   render: function() {
     return(
-      <div>Hey!</div>
+      <SayHello text="Hey!" />
     );
   }
 });
