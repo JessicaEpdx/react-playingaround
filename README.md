@@ -1,3 +1,6 @@
+This is just for me to play around and learn some react! 
+
+
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 # React Tutorial
