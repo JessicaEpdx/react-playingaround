@@ -1,3 +1,15 @@
+
+var HelloWorld = React.createClass({
+  render: function() {
+    return(
+      <div class="helloWorld">
+        <SayHello text="Hey!" />
+        <AddButton />
+      </div>
+    );
+  }
+});
+
 var SayHello = React.createClass({
   render: function() {
     return(
@@ -9,22 +21,21 @@ var SayHello = React.createClass({
 });
 
 var AddButton = React.createClass({
-  render: function() {
-    return(
-      <button>
-        {this.props.buttonText}
-      </button>
-    );
-  }
-});
+  getInitialState: function() {
+    return {buttonText: "Click me!"};
+  },
 
-var HelloWorld = React.createClass({
+  changeText: function() {
+    this.setState ({
+      buttonText: "Way to go!"
+    });
+  },
+
   render: function() {
     return(
-      <div class="helloWorld">
-        <SayHello text="Hey!" />
-        <AddButton buttonText="Click me!" />
-      </div>
+      <button onClick={this.changeText}>
+        {this.state.buttonText}
+      </button>
     );
   }
 });
