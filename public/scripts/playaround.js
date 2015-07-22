@@ -22,20 +22,28 @@ var SayHello = React.createClass({
 
 var AddButton = React.createClass({
   getInitialState: function() {
-    return {buttonText: "Click me!"};
+    return {
+      buttonText: "If you click me I'll tell you a secret!"};
+      message: ""
   },
 
   changeText: function() {
     this.setState ({
-      buttonText: "Way to go!"
+      buttonText: "I'm a liar.",
+      message: "I swear!"
     });
   },
 
   render: function() {
     return(
-      <button onClick={this.changeText}>
-        {this.state.buttonText}
-      </button>
+      <div>
+        <button onClick={this.changeText}>
+          {this.state.buttonText}
+        </button>
+        <div className="message">
+          {this.state.message}
+        </div>
+      </div>
     );
   }
 });
