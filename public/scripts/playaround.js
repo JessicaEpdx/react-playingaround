@@ -8,10 +8,23 @@ var SayHello = React.createClass({
   }
 });
 
+var AddButton = React.createClass({
+  render: function() {
+    return(
+      <button>
+        {this.props.buttonText}
+      </button>
+    );
+  }
+});
+
 var HelloWorld = React.createClass({
   render: function() {
     return(
-      <SayHello text="Hey!" />
+      <div class="helloWorld">
+        <SayHello text="Hey!" />
+        <AddButton buttonText="Click me!" />
+      </div>
     );
   }
 });
