@@ -2,9 +2,9 @@
 var HelloWorld = React.createClass({
   render: function() {
     return(
-      <div class="helloWorld">
+      <div className="helloWorld">
         <SayHello text="Hey!" />
-        <AddButton />
+        <Button />
       </div>
     );
   }
@@ -20,7 +20,7 @@ var SayHello = React.createClass({
   }
 });
 
-var AddButton = React.createClass({
+var Button = React.createClass({
   getInitialState: function() {
     return {
       buttonText: "If you click me I'll tell you a secret!"};
@@ -50,5 +50,5 @@ var AddButton = React.createClass({
 
 React.render(
   <HelloWorld />,
-  document.body
+  document.getElementById('helloWorld')
 )
