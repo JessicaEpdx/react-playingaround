@@ -2,13 +2,11 @@ var InputBox = React.createClass({
   getInitialState: function(){
     return {autoDisplay: "Auto Updated Text Here"};
   },
-
   changeAutoDisplay: function(event) {
     this.setState({
       autoDisplay: event.target.value
-    })
+    });
   },
-
   render: function() {
     return(
       <div>
@@ -54,10 +52,9 @@ var InputAutoUpdate = React.createClass({
         <br />
         <input type="text" onChange={this.props.changeAutoDisplay} />
       </div>
-    )
+    );
   }
-
-})
+});
 
 React.render(
   <InputBox />,
