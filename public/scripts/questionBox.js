@@ -1,26 +1,29 @@
 var QuestionBox = React.createClass({
   getInitialState: function() {
-    return{data:
-      [{author: "Pete Hunt", text: "This is one comment"},
-        {author: "Jordan Walke", text: "This is *another* comment"}]
+    return {
+      change: "Nope I'm the original",
+      data:[
+      {author: "Pete Hunt", text: "This is one comment"},
+      {author: "Jordan Walke", text: "This is *another* comment"}
+      ]
     };
   },
 
-  createQuestion: function(event) {
-    event.preventDefault();
-    var authorInput = React.findDOMNode(this.refs.authorInput).value.trim();
-    var textInput = React.findDomeNode(this.refs.textInput).value.trim();
-    if (!authorInput || !textInput) {
-      return;
-    }
+  createQuestion: function(e) {
+    e.preventDefault();
+    var inputValue = React.findDOMNode(this.refs.inputValue).value.trim();
+    this.setState({
+      change: this.inputValue
+    });
   },
 
   render: function(){
     return(
       <div className="questionBox">
-        <QuestionForm createQuestion={this.createQuestion }/>
+        <QuestionForm createQuestion={this.createQuestion} />
         <p>Question Box</p>
         <QuestionList data={this.state.data}/>
+        {this.state.change} <br />
       </div>
     );
   }
@@ -66,11 +69,8 @@ var QuestionForm = React.createClass({
       <div className="questionForm">
         <form onSubmit={this.props.createQuestion}>
           <label>Question Author</label>
-          <input type="text" ref="authorInput"/>
-          <br />
-          <label>What is your question?</label>
-          <input type="text" ref="textInput"/>
-          <button type="submit">Ask!</button>
+          <input type="text" ref="inputValue" />
+          <input type="submit" value="Ask!"></input>
         </form>
       </div>
     );
