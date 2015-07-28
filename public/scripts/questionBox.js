@@ -1,12 +1,18 @@
-var data = [
-  {author: "Pete Hunt", text: "This is one comment"},
-  {author: "Jordan Walke", text: "This is *another* comment"}
-];
-
 var QuestionBox = React.createClass({
+  getInitialState: function() {
+    return{data:
+      [{author: "Pete Hunt", text: "This is one comment"},
+        {author: "Jordan Walke", text: "This is *another* comment"}]
+    };
+  },
+
   createQuestion: function(event) {
     event.preventDefault();
-
+    var authorInput = React.findDOMNode(this.refs.authorInput).value.trim();
+    var textInput = React.findDomeNode(this.refs.textInput).value.trim();
+    if (!authorInput || !textInput) {
+      return;
+    }
   },
 
   render: function(){
@@ -14,7 +20,7 @@ var QuestionBox = React.createClass({
       <div className="questionBox">
         <QuestionForm createQuestion={this.createQuestion }/>
         <p>Question Box</p>
-        <QuestionList data={this.props.data}/>
+        <QuestionList data={this.state.data}/>
       </div>
     );
   }
@@ -72,6 +78,6 @@ var QuestionForm = React.createClass({
 });
 
 React.render(
-<QuestionBox data={data} />,
+<QuestionBox />,
   document.getElementById('questionBox')
 )
