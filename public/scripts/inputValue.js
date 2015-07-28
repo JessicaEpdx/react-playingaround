@@ -57,8 +57,6 @@ var InputAutoUpdate = React.createClass({
     )
   }
 
-
-
 })
 
 React.render(
