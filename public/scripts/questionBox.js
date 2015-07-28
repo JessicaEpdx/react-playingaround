@@ -4,9 +4,15 @@ var data = [
 ];
 
 var QuestionBox = React.createClass({
+  createQuestion: function(event) {
+    event.preventDefault();
+
+  },
+
   render: function(){
     return(
       <div className="questionBox">
+        <QuestionForm createQuestion={this.createQuestion }/>
         <p>Question Box</p>
         <QuestionList data={this.props.data}/>
       </div>
@@ -19,12 +25,14 @@ var QuestionList = React.createClass({
     var questionNodes =
       this.props.data.map(function(question){
         return(
+          <div>
           <Question author={question.author} text={question.text} />
+          </div>
         )
       });
     return(
       <div>
-        <p>Question List</p>
+        <h1>Questions</h1>
           {questionNodes}
       </div>
     );
@@ -35,11 +43,29 @@ var Question = React.createClass({
   render: function() {
     return(
       <div className="question">
-        <p>Questions</p>
         <h3 className="questionAuthor">
-        {this.props.author}
+          {this.props.author}
         </h3>
-        {this.props.text}
+        <p className="questionText">
+          {this.props.text}
+        </p>
+      </div>
+    );
+  }
+});
+
+var QuestionForm = React.createClass({
+  render: function() {
+    return(
+      <div className="questionForm">
+        <form onSubmit={this.props.createQuestion}>
+          <label>Question Author</label>
+          <input type="text" ref="authorInput"/>
+          <br />
+          <label>What is your question?</label>
+          <input type="text" ref="textInput"/>
+          <button type="submit">Ask!</button>
+        </form>
       </div>
     );
   }
