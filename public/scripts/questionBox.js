@@ -13,7 +13,7 @@ var QuestionBox = React.createClass({
     e.preventDefault();
     var inputValue = React.findDOMNode(this.refs.inputValue).value.trim();
     this.setState({
-      change: this.inputValue
+      change: inputValue
     });
   },
 
