@@ -1,27 +1,36 @@
 var InputBox = React.createClass({
+  getInitialState: function(){
+    return {autoDisplay: "Auto Updated Text Here"};
+  },
+
+  changeAutoDisplay: function(event) {
+    this.setState({
+      autoDisplay: event.target.value
+    })
+  },
+
   render: function() {
     return(
       <div>
-      <InputDisplay />
+        <InputSubmit />
+        <InputAutoUpdate autoDisplay={this.state.autoDisplay} changeAutoDisplay={this.changeAutoDisplay}/>
       </div>
     );
   }
 });
 
-var InputDisplay = React.createClass({
-
+var InputSubmit = React.createClass({
   getInitialState: function(){
-    return {display: "IT WILL SAY IT HERE!"};
+    return {display: "Submitted Text Here"};
   },
 
   changeDisplay: function(e){
-    e.preventDefault();
-    var input = React.findDOMNode(this.refs.displayText).value.trim();
-    this.setState({
-      display: input
-    });
-  },
-
+      e.preventDefault();
+      var input = React.findDOMNode(this.refs.displayText).value.trim();
+      this.setState({
+        display: input
+      });
+    },
   render: function() {
     return(
       <div>
@@ -37,6 +46,20 @@ var InputDisplay = React.createClass({
   }
 });
 
+var InputAutoUpdate = React.createClass({
+  render: function() {
+    return(
+      <div>
+        {this.props.autoDisplay}
+        <br />
+        <input type="text" onChange={this.props.changeAutoDisplay} />
+      </div>
+    )
+  }
+
+
+
+})
 
 React.render(
   <InputBox />,
