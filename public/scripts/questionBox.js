@@ -1,7 +1,6 @@
 var QuestionBox = React.createClass({
   getInitialState: function() {
     return {
-      change: "Nope I'm the original",
       data:[
       {author: "Pete Hunt", text: "This is one comment"},
       {author: "Jordan Walke", text: "This is *another* comment"}
@@ -9,11 +8,11 @@ var QuestionBox = React.createClass({
     };
   },
 
-  createQuestion: function(e) {
-    e.preventDefault();
-    var inputValue = React.findDOMNode(this.refs.inputValue).value.trim();
+  createQuestion: function(input) {
+    var authorInput = input[0];
+    var questionInput = input[1];
     this.setState({
-      change: inputValue
+      data: this.state.data.concat({author: authorInput, text: questionInput})
     });
   },
 
@@ -22,7 +21,7 @@ var QuestionBox = React.createClass({
       <div className="questionBox">
         <QuestionForm createQuestion={this.createQuestion} />
         <p>Question Box</p>
-        <QuestionList data={this.state.data}/>
+        <QuestionList commentData={this.state.data} />
         {this.state.change} <br />
       </div>
     );
@@ -32,7 +31,7 @@ var QuestionBox = React.createClass({
 var QuestionList = React.createClass({
   render: function() {
     var questionNodes =
-      this.props.data.map(function(question){
+      this.props.commentData.map(function(question){
         return(
           <div>
           <Question author={question.author} text={question.text} />
@@ -64,12 +63,20 @@ var Question = React.createClass({
 });
 
 var QuestionForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var author = React.findDOMNode(this.refs.authorInput).value.trim();
+    var question = React.findDOMNode(this.refs.questionInput).value.trim();
+    this.props.createQuestion([author, question]);
+  },
   render: function() {
     return(
       <div className="questionForm">
-        <form onSubmit={this.props.createQuestion}>
+        <form onSubmit={this.handleSubmit}>
           <label>Question Author</label>
-          <input type="text" ref="inputValue" />
+          <input type="text" ref="authorInput" /><br />
+          <label>Whats your question?</label>
+          <input type="text" ref="questionInput" />
           <input type="submit" value="Ask!"></input>
         </form>
       </div>
