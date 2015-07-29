@@ -11,9 +11,13 @@ var QuestionBox = React.createClass({
   createQuestion: function(input) {
     var authorInput = input[0];
     var questionInput = input[1];
+    if (!authorInput || !questionInput){
+      return;
+    };
     this.setState({
       data: this.state.data.concat({author: authorInput, text: questionInput})
     });
+
   },
 
   render: function(){
@@ -68,6 +72,8 @@ var QuestionForm = React.createClass({
     var author = React.findDOMNode(this.refs.authorInput).value.trim();
     var question = React.findDOMNode(this.refs.questionInput).value.trim();
     this.props.createQuestion([author, question]);
+    React.findDOMNode(this.refs.authorInput).value = ""
+    React.findDOMNode(this.refs.questionInput).value = ""
   },
   render: function() {
     return(
